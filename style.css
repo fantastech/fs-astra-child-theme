@@ -1,0 +1,82 @@
+/* 
+Theme Name:		 [TODO] Rename This
+Theme URI:		 https://fantastech.co
+Description:	 This is a child theme for FS Core parent theme.
+Author:			 Fantastech Solutions
+Author URI:		 https://fantastech.co
+Template:		 astra
+Version:		 1.0.8
+*/
+
+/* CSS of all screens */
+
+/**********************
+* Global
+***********************/
+
+a, a:hover, a:focus{
+	outline: none;
+}
+
+/* Resetting basic Gravity Forms' error message styling */
+
+.gform_wrapper li.gfield.gfield_error, .gform_wrapper li.gfield.gfield_error.gfield_contains_required.gfield_creditcard_warning {
+    background-color: transparent !important;
+    margin-bottom: 0px !important;
+    border-top: 0px !important;
+    border-bottom: 0px !important;
+    padding-bottom: 0px !important;
+    padding-top: 0px !important;
+    box-sizing: border-box !important;
+}
+
+.gform_wrapper li.gfield.gfield_error.gfield_contains_required div.gfield_description {
+    padding-top: 5px !important;
+}
+
+
+/**********************
+* Header
+***********************/
+
+
+
+/**********************
+* Footer
+***********************/
+
+
+
+/**********************
+* Homepage
+***********************/
+
+
+
+
+/**********************
+* Page 1
+***********************/
+
+
+
+/**********************
+* Page 2
+***********************/
+
+
+
+
+/* CSS for screens below 992px (tablet screens) */
+@media only screen and (max-width: 992px){
+
+
+
+}
+
+/* CSS for screens below 767px (mobile screens) */
+@media only screen and (max-width: 767px){
+
+	
+
+}
