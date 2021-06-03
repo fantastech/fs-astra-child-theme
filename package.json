@@ -1,0 +1,20 @@
+{
+  "private": true,
+  "scripts": {
+    "lint": "npm run -s lint:scripts && npm run -s lint:styles",
+    "lint:scripts": "eslint assets/js",
+    "lint:styles": "stylelint \"*.css\"",
+    "test": "npm run -s lint"
+  },
+  "engines": {
+    "node": "^16.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.27.0",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^22.0.0"
+  },
+  "dependencies": {
+    "jquery": "^1.12.4"
+  }
+}
