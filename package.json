@@ -7,7 +7,7 @@
     "test": "npm run -s lint"
   },
   "engines": {
-    "node": "^10.23.0"
+    "node": "^16.2.0"
   },
   "devDependencies": {
     "eslint": "^7.27.0",
