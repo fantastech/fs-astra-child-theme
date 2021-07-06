@@ -11,7 +11,7 @@ if (! defined('ABSPATH')) {
 /**
 * Define Constants
 */
-define('FS_THEME_VERSION', '1.0.9');
+define('FS_THEME_VERSION', '1.0.10');
 define('FS_THEME_USE_FONT_AWESOME', false); // Enable this only if BB plugin is active.
 define('FS_THEME_USE_CUSTOM_JS', false); // This will enqueue script.js file.
 define('FS_THEME_USE_LIGHTBOX_LIB', false); // This will enqueue jquery.lightbox_me.min.js file.
@@ -20,6 +20,7 @@ define('FS_THEME_USE_LIGHTBOX_LIB', false); // This will enqueue jquery.lightbox
 * Include core functions
 */
 require_once 'includes/core-functions.php';
+require_once 'includes/bb-functions.php';
 
 /**
 * Enqueue styles
@@ -87,3 +88,160 @@ function fs_define_post_types_taxonomies()
 // Uncomment the lines below to add custom post type and taxonomies.
 // phpcs:ignore Squiz.Commenting.InlineComment.InvalidEndChar
 // add_action('init', 'fs_define_post_types_taxonomies', 0);
+
+/**
+ * Create custom button presets for BB Button module.
+ *
+ * @see /includes/bb-functions.php
+ */
+function fs_define_bb_button_presets()
+{
+    $button_presets = array();
+
+    $button_presets['primary'] = array(
+        'name' => 'Primary',
+        'class' => 'primary-button',
+        'settings' => array(
+            'bg_color'                  => "dddddd",
+            'bg_hover_color'            => "808080",
+            'text_color'                => "000000",
+            'text_hover_color'          => "000000",
+            'padding_top'               => '10',
+            'padding_top_medium'        => '10',
+            'padding_top_responsive'    => '10',
+            'padding_right'             => '20',
+            'padding_right_medium'      => '20',
+            'padding_right_responsive'  => '20',
+            'padding_bottom'            => '10',
+            'padding_bottom_medium'     => '10',
+            'padding_bottom_responsive' => '10',
+            'padding_left'              => '20',
+            'padding_left_medium'       => '20',
+            'padding_left_responsive'   => '20',
+            'border' => array(
+                'style' => "solid",
+                'color' => "cccccc",
+                'width' => array(
+                    'top' => '1',
+                    'right' => '1',
+                    'bottom' => '1',
+                    'left' => '1'
+                ),
+                'radius' => array(
+                    'top_left' => '5',
+                    'top_right' => '5',
+                    'bottom_left' => '5',
+                    'bottom_right' => '5'
+                )
+            ),
+            'border_medium'     => array(
+                'style' => "solid",
+                'color' => "cccccc",
+                'width' => array(
+                    'top' => '1',
+                    'right' => '1',
+                    'bottom' => '1',
+                    'left' => '1'
+                ),
+                'radius' => array(
+                    'top_left' => '5',
+                    'top_right' => '5',
+                    'bottom_left' => '5',
+                    'bottom_right' => '5'
+                )
+            ),
+            'border_responsive' => array(
+                'style' => "solid",
+                'color' => "cccccc",
+                'width' => array(
+                    'top' => '1',
+                    'right' => '1',
+                    'bottom' => '1',
+                    'left' => '1'
+                ),
+                'radius' => array(
+                    'top_left' => '5',
+                    'top_right' => '5',
+                    'bottom_left' => '5',
+                    'bottom_right' => '5'
+                )
+            ),
+            'border_hover_color' => "808080"
+        )
+    );
+
+    $button_presets['secondary'] = array(
+        'name' => 'Secondary',
+        'class' => 'secondary-button',
+        'settings' => array(
+            'bg_color'                  => "aaaaaa",
+            'bg_hover_color'            => "808080",
+            'text_color'                => "000000",
+            'text_hover_color'          => "ffffff",
+            'padding_top'               => '10',
+            'padding_top_medium'        => '10',
+            'padding_top_responsive'    => '10',
+            'padding_right'             => '20',
+            'padding_right_medium'      => '20',
+            'padding_right_responsive'  => '20',
+            'padding_bottom'            => '10',
+            'padding_bottom_medium'     => '10',
+            'padding_bottom_responsive' => '10',
+            'padding_left'              => '20',
+            'padding_left_medium'       => '20',
+            'padding_left_responsive'   => '20',
+            'border' => array(
+                'style' => "solid",
+                'color' => "999999",
+                'width' => array(
+                    'top' => '1',
+                    'right' => '1',
+                    'bottom' => '1',
+                    'left' => '1'
+                ),
+                'radius' => array(
+                    'top_left' => '5',
+                    'top_right' => '5',
+                    'bottom_left' => '5',
+                    'bottom_right' => '5'
+                )
+            ),
+            'border_medium'     => array(
+                'style' => "solid",
+                'color' => "999999",
+                'width' => array(
+                    'top' => '1',
+                    'right' => '1',
+                    'bottom' => '1',
+                    'left' => '1'
+                ),
+                'radius' => array(
+                    'top_left' => '5',
+                    'top_right' => '5',
+                    'bottom_left' => '5',
+                    'bottom_right' => '5'
+                )
+            ),
+            'border_responsive' => array(
+                'style' => "solid",
+                'color' => "999999",
+                'width' => array(
+                    'top' => '1',
+                    'right' => '1',
+                    'bottom' => '1',
+                    'left' => '1'
+                ),
+                'radius' => array(
+                    'top_left' => '5',
+                    'top_right' => '5',
+                    'bottom_left' => '5',
+                    'bottom_right' => '5'
+                )
+            ),
+            'border_hover_color' => "808080"
+        )
+    );
+
+    return $button_presets;
+
+}
