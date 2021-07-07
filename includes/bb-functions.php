@@ -77,6 +77,7 @@ add_filter('fl_builder_node_settings', function ( $settings, $node ) {
             $custom_class = isset($presets[$settings->items[$key]->button_preset]['class']) ? $presets[$settings->items[$key]->button_preset]['class'] : '';
 
             foreach ($custom_settings as $key => $setting) {
+                // phpcs:ignore Squiz.PHP.DisallowMultipleAssignments.Found
                 $settings->items[$i]->$key = $setting;
             }
 
