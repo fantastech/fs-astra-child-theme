@@ -31,7 +31,8 @@ add_filter('fl_builder_register_settings_form', function ( $form, $id ) {
     }
 
     if ('buttons_form' === $id) {
-        $form['tabs']['style']['sections']['style']['fields'] = $preset_field + $form['tabs']['style']['sections']['style']['fields'];
+        $form['tabs']['style']['sections']['style']['fields']
+        = $preset_field + $form['tabs']['style']['sections']['style']['fields'];
     }
 
     return $form;
@@ -58,7 +59,8 @@ add_filter('fl_builder_node_settings', function ( $settings, $node ) {
         }
 
         $custom_settings = $presets[$settings->button_preset]['settings'];
-        $custom_class = isset($presets[$settings->button_preset]['class']) ? $presets[$settings->button_preset]['class'] : '';
+        $custom_class = isset($presets[$settings->button_preset]['class'])
+        ? $presets[$settings->button_preset]['class'] : '';
 
         foreach ($custom_settings as $key => $setting) {
             $settings->$key = $setting;
@@ -74,7 +76,8 @@ add_filter('fl_builder_node_settings', function ( $settings, $node ) {
             }
 
             $custom_settings = $presets[$button_settings->button_preset]['settings'];
-            $custom_class = isset($presets[$settings->items[$key]->button_preset]['class']) ? $presets[$settings->items[$key]->button_preset]['class'] : '';
+            $custom_class = isset($presets[$settings->items[$key]->button_preset]['class'])
+            ? $presets[$settings->items[$key]->button_preset]['class'] : '';
 
             foreach ($custom_settings as $key => $setting) {
                 // phpcs:ignore Squiz.PHP.DisallowMultipleAssignments.Found
