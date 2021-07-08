@@ -118,6 +118,42 @@ function fs_define_bb_button_presets()
             'padding_left'              => '20',
             'padding_left_medium'       => '20',
             'padding_left_responsive'   => '20',
+            'typography' => array(
+                'font_size' => array(
+                    'length' => '16',
+                    'unit' => 'px'
+                ),
+                'line_height' => array(
+                    'length' => '20',
+                    'unit' => 'px'
+                ),
+                'font_weight' => '400',
+                'text_align' => 'left'
+            ),
+            'typography_medium' => array(
+                'font_size' => array(
+                    'length' => '16',
+                    'unit' => 'px'
+                ),
+                'line_height' => array(
+                    'length' => '20',
+                    'unit' => 'px'
+                ),
+                'font_weight' => '400',
+                'text_align' => 'left'
+            ),
+            'typography_responsive' => array(
+                'font_size' => array(
+                    'length' => '16',
+                    'unit' => 'px'
+                ),
+                'line_height' => array(
+                    'length' => '20',
+                    'unit' => 'px'
+                ),
+                'font_weight' => '400',
+                'text_align' => 'left'
+            ),
             'border' => array(
                 'style' => "solid",
                 'color' => "cccccc",
@@ -132,6 +168,13 @@ function fs_define_bb_button_presets()
                     'top_right' => '5',
                     'bottom_left' => '5',
                     'bottom_right' => '5'
+                ),
+                'shadow' => array(
+                    'color' => '',
+                    'horizontal' => '',
+                    'vertical' => '',
+                    'blur' => '',
+                    'spread' => ''
                 )
             ),
             'border_medium'     => array(
@@ -148,6 +191,13 @@ function fs_define_bb_button_presets()
                     'top_right' => '5',
                     'bottom_left' => '5',
                     'bottom_right' => '5'
+                ),
+                'shadow' => array(
+                    'color' => '',
+                    'horizontal' => '',
+                    'vertical' => '',
+                    'blur' => '',
+                    'spread' => ''
                 )
             ),
             'border_responsive' => array(
@@ -164,6 +214,13 @@ function fs_define_bb_button_presets()
                     'top_right' => '5',
                     'bottom_left' => '5',
                     'bottom_right' => '5'
+                ),
+                'shadow' => array(
+                    'color' => '',
+                    'horizontal' => '',
+                    'vertical' => '',
+                    'blur' => '',
+                    'spread' => ''
                 )
             ),
             'border_hover_color' => "808080"
@@ -190,6 +247,42 @@ function fs_define_bb_button_presets()
             'padding_left'              => '20',
             'padding_left_medium'       => '20',
             'padding_left_responsive'   => '20',
+            'typography' => array(
+                'font_size' => array(
+                    'length' => '16',
+                    'unit' => 'px'
+                ),
+                'line_height' => array(
+                    'length' => '20',
+                    'unit' => 'px'
+                ),
+                'font_weight' => '400',
+                'text_align' => 'left'
+            ),
+            'typography_medium' => array(
+                'font_size' => array(
+                    'length' => '16',
+                    'unit' => 'px'
+                ),
+                'line_height' => array(
+                    'length' => '20',
+                    'unit' => 'px'
+                ),
+                'font_weight' => '400',
+                'text_align' => 'left'
+            ),
+            'typography_responsive' => array(
+                'font_size' => array(
+                    'length' => '16',
+                    'unit' => 'px'
+                ),
+                'line_height' => array(
+                    'length' => '20',
+                    'unit' => 'px'
+                ),
+                'font_weight' => '400',
+                'text_align' => 'left'
+            ),
             'border' => array(
                 'style' => "solid",
                 'color' => "999999",
@@ -204,6 +297,13 @@ function fs_define_bb_button_presets()
                     'top_right' => '5',
                     'bottom_left' => '5',
                     'bottom_right' => '5'
+                ),
+                'shadow' => array(
+                    'color' => '',
+                    'horizontal' => '',
+                    'vertical' => '',
+                    'blur' => '',
+                    'spread' => ''
                 )
             ),
             'border_medium'     => array(
@@ -220,6 +320,13 @@ function fs_define_bb_button_presets()
                     'top_right' => '5',
                     'bottom_left' => '5',
                     'bottom_right' => '5'
+                ),
+                'shadow' => array(
+                    'color' => '',
+                    'horizontal' => '',
+                    'vertical' => '',
+                    'blur' => '',
+                    'spread' => ''
                 )
             ),
             'border_responsive' => array(
@@ -236,6 +343,13 @@ function fs_define_bb_button_presets()
                     'top_right' => '5',
                     'bottom_left' => '5',
                     'bottom_right' => '5'
+                ),
+                'shadow' => array(
+                    'color' => '',
+                    'horizontal' => '',
+                    'vertical' => '',
+                    'blur' => '',
+                    'spread' => ''
                 )
             ),
             'border_hover_color' => "808080"
