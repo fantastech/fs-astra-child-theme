@@ -35,6 +35,11 @@ add_filter('fl_builder_register_settings_form', function ( $form, $id ) {
         = $preset_field + $form['tabs']['style']['sections']['style']['fields'];
     }
 
+    if ('cta' === $id) {
+        $form['button']['sections']['btn_text']['fields']
+        = $preset_field + $form['button']['sections']['btn_text']['fields'];
+    }
+
     return $form;
 }, 10, 2);
 
@@ -89,6 +94,24 @@ add_filter('fl_builder_node_settings', function ( $settings, $node ) {
             if ('' !== $custom_class) {
                 $settings->items[$i]->class = $settings->items[$i]->class . ' ' . $custom_class;
             }
+        }
+    }
+    elseif('cta' === $settings->type){
+        if ('default' === $settings->button_preset) {
+            return $settings;
+        }
+
+        $custom_settings = $presets[$settings->button_preset]['settings'];
+        $custom_class = isset($presets[$settings->button_preset]['class'])
+        ? $presets[$settings->button_preset]['class'] : '';
+
+        foreach ($custom_settings as $key => $setting) {
+            $skey = 'btn_' . $key;
+            $settings->$skey = $setting;
+        }
+
+        if ('' !== $custom_class) {
+            $settings->class = $settings->class . ' ' . $custom_class;
         }
     }
 
