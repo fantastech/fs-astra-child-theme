@@ -2,6 +2,7 @@
 <ruleset name="Theme">
     <!-- Check all files under project root -->
     <file>./</file>
+    <exclude-pattern>/*.(css|js)</exclude-pattern>
     <exclude-pattern>/node_modules/*</exclude-pattern>
     <exclude-pattern>/config/*</exclude-pattern>
     <exclude-pattern>/dist/*</exclude-pattern>
