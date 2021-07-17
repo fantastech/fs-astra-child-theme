@@ -116,7 +116,7 @@ function fs_modify_theme_labels($labels){
 		'astra'        => array(
 			'name'        => 'FS Core',
 			'description' => 'This is the main parent theme of your website. Do not delete.',
-			'screenshot'  => get_stylesheet_directory_uri() . '/assets/images/screenshot-parent.png',
+			'screenshot'  => get_stylesheet_directory_uri() . '/screenshot-parent.png',
 		),
 		'astra-pro'    => array(
 			'name'        => 'FS Core',
@@ -151,128 +151,26 @@ add_filter('astra_header_break_point', function () {
 });
 
 /**
- * Social share function. Use with
- * add_action to inject on frontend
+ * `wp_parse_args`, but recursive.
+ *
+ * @param $a
+ * @param $b
+ *
+ * @return array
  */
-function fs_social_share_icons()
+function fs_wp_parse_args_recursive($a, $b)
 {
-    $post_id = get_the_ID();
-    $shareURL = rawurlencode(get_permalink($post_id));
-    $shareTitle = str_replace(' ', '%20', get_the_title($post_id));
-    $shareThumbnail = wp_get_attachment_image_src(get_post_thumbnail_id($post_id), 'full');
+    $a = (array) $a;
+    $b = (array) $b;
+    $r = $b;
 
-    // Email Vars.
-    $mailSubject = $shareTitle;
-    $mailBody =  $shareTitle . '<br />' . $shareURL;
+    foreach ($a as $k => &$v) {
+        if (is_array($v) && isset($r[$k])) {
+            $r[ $k ] = fs_wp_parse_args_recursive($v, $r[$k]);
+        } else {
+            $r[ $k ] = $v;
+        }
+    }
 
-    // Construct sharing URL without using any script.
-    $twitterURL = add_query_arg([
-        'text' => $shareTitle,
-        'url' => $shareURL,
-    ], 'https://twitter.com/intent/tweet');
-
-    $facebookURL = add_query_arg([
-        'u' => $shareURL,
-    ], 'https://www.facebook.com/sharer/sharer.php');
-    
-    $googleURL = add_query_arg([
-        'url' => $shareURL,
-    ], 'https://plus.google.com/share');
-    
-    $linkedInURL = add_query_arg([
-        'mini' => 'true',
-        'url' => $shareURL,
-        'title' => $shareTitle,
-    ], 'https://www.linkedin.com/shareArticle');
-    
-    $whatsappURL = add_query_arg([
-        'text' => "{$shareTitle} {$shareURL}",
-    ], 'whatsapp://send');
-    
-    $pinterestURL = add_query_arg([
-        'url' => $shareURL,
-        'media' => $shareThumbnail[0],
-        'description' => $shareTitle,
-    ], 'https://pinterest.com/pin/create/button/');
-
-    ?>
-    <div class="social-share-box">
-        <a
-            class="social-share-box-link social-share-email"
-            href="mailto:?subject=<?php echo esc_attr($mailSubject); ?>&amp;body=<?php echo esc_attr($mailBody); ?>"
-        >
-            <span class="fa-stack fa-sm icon-envelope">
-                <i class="fa fa-square fa-stack-2x"></i>
-                <i class="fa fa-envelope fa-stack-1x" title="Share on Gmail"></i>
-            </span>
-        </a>
-
-        <a
-            class="social-share-box-link social-share-facebook"
-            href="<?php echo esc_url($facebookURL); ?>"
-            target="_blank"
-        >
-            <span class="fa-stack fa-sm icon-facebook">
-                <i class="fa fa-square fa-stack-2x"></i>
-                <i class="fa fa-facebook fa-stack-1x" title="Share on facebook"></i>
-            </span>
-        </a>
-
-        <a
-            class="social-share-box-link social-share-twitter"
-            href="<?php echo esc_url($twitterURL); ?>"
-            target="_blank"
-        >
-            <span class="fa-stack fa-sm icon-twitter">
-                <i class="fa fa-square fa-stack-2x"></i>
-                <i class="fa fa-twitter fa-stack-1x" title="Share on Twitter"></i>
-            </span>
-        </a>
-
-        <a
-            class="social-share-box-link social-share-google-plus"
-            href="<?php echo esc_url($googleURL); ?>"
-            target="_blank"
-        >
-            <span class="fa-stack fa-sm icon-gplus">
-                <i class="fa fa-square fa-stack-2x"></i>
-                <i class="fa fa-google-plus fa-stack-1x" title="Share on google plus"></i>
-            </span>
-        </a>
-
-        <a
-            class="social-share-box-link social-share-linkedin"
-            href="<?php echo esc_url($linkedInURL); ?>"
-            target="_blank"
-        >
-            <span class="fa-stack fa-sm icon-linkedin">
-                <i class="fa fa-square fa-stack-2x"></i>
-                <i class="fa fa-linkedin fa-stack-1x" title="Share on LinkedIn"></i>
-            </span>
-        </a>
-
-        <a
-            class="social-share-box-link social-share-whatsapp"
-            href="<?php echo esc_url($whatsappURL); ?>"
-            target="_blank"
-        >
-            <span class="fa-stack fa-sm icon-whatsapp">
-                <i class="fa fa-square fa-stack-2x"></i>
-                <i class="fa fa-whatsapp fa-stack-1x" title="Share on Whatsapp"></i>
-            </span>
-        </a>
-
-        <a
-            class="social-share-box-link social-share-pinterest"
-            href="<?php echo esc_url($pinterestURL); ?>"
-            target="_blank"
-        >
-            <span class="fa-stack fa-sm icon-pinterest">
-                <i class="fa fa-square fa-stack-2x"></i>
-                <i class="fa fa-pinterest fa-stack-1x" title="Share on pinterest"></i>
-            </span>
-        </a>
-
-    </div>
-    <?php
+    return $r;
 }

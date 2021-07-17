@@ -34,6 +34,6 @@ module.exports = {
     ],
   },
   ignorePatterns: [
-    'assets/js/jquery.lightbox_me.min.js',
+    'resources/scripts/jquery.lightbox_me.min.js',
   ],
 };
