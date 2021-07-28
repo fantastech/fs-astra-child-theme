@@ -4,13 +4,15 @@
  */
 
 /**
+ * Filter to add custom button presets to various modules.
+ *
  * @param object $form The module form object.
  * @param string $id   The module ID.
  *
  * @return object
  */
 add_filter('fl_builder_register_settings_form', function ($form, $id) {
-    if (! in_array($id, ['button', 'buttons_form', 'cta', 'row'], true)) {
+    if (! in_array($id, ['button', 'buttons_form', 'cta'], true)) {
         return $form;
     }
 
@@ -37,38 +39,6 @@ add_filter('fl_builder_register_settings_form', function ($form, $id) {
     ];
 
     switch ($id) {
-        case 'row':
-            // General BB row preset.
-            $row_presets_field = [
-                'row_class' => [
-                    'type' => 'select',
-                    'label' => 'Row Style Preset',
-                    'default' => 'default',
-                    'options' => fs_get_row_presets(),
-                ]
-            ];
-
-            $form['tabs']['style']['sections']['general']['fields'] = array_merge(
-                $row_presets_field,
-                $form['tabs']['style']['sections']['general']['fields']
-            );
-
-            // Background preset field for rows.
-            // phpcs:ignore Generic.Files.LineLength.TooLong
-            $form['tabs']['style']['sections']['background']['fields']['bg_type']['options']['preset'] = 'Preset';
-            $form['tabs']['style']['sections']['background']['fields']['bg_type']['toggle']['preset'] = [
-                'fields' => [
-                    'background_class',
-                ],
-            ];
-            $form['tabs']['style']['sections']['background']['fields']['background_class'] = [
-                'type' => 'select',
-                'label' => 'Preset',
-                'default' => 'default',
-                'options' => fs_get_background_presets(),
-            ];
-            break;
-
         case 'button':
             $form['style']['sections']['style']['fields'] = array_merge(
                 $preset_field,
@@ -93,7 +63,58 @@ add_filter('fl_builder_register_settings_form', function ($form, $id) {
 }, 10, 2);
 
 /**
+ * Sets custom row classes.
+ *
+ * @param object $form The module form object.
+ * @param string $id   The module ID.
+ *
+ * @return object
+ */
+add_filter('fl_builder_register_settings_form', function ($form, $id) {
+    if ('row' !== $id) {
+        return $form;
+    }
+
+    // General BB row preset.
+    $style_field = [
+        'row_class' => [
+            'type' => 'select',
+            'label' => 'Row Style Preset',
+            'default' => 'row-preset-default',
+            'options' => fs_get_row_preset_class_names(),
+        ],
+    ];
+
+    $form['tabs']['style']['sections']['general']['fields'] = array_merge(
+        $style_field,
+        $form['tabs']['style']['sections']['general']['fields'],
+    );
+
+    // Background preset field for rows.
+    // phpcs:ignore Generic.Files.LineLength.TooLong
+    $form['tabs']['style']['sections']['background']['fields']['bg_type']['options']['preset'] = 'Preset';
+    $form['tabs']['style']['sections']['background']['fields']['bg_type']['toggle']['preset'] = [
+        'fields' => [
+            'bg_preset_class',
+        ],
+    ];
+    $form['tabs']['style']['sections']['background']['fields']['bg_preset_class'] = [
+        'type' => 'select',
+        'label' => 'Preset',
+        'default' => 'bg-default',
+        'options' => fs_get_background_class_names(),
+    ];
+
+    return $form;
+}, 10, 2);
+
+/**
  * Add classes to BB row.
+ *
+ * @param array  $attrs Row attributes
+ * @param object $row   Row object
+ *
+ * @return mixed
  */
 add_filter('fl_builder_row_attributes', function ($attrs, $row) {
     if ('row' !== $row->type) {
@@ -102,13 +123,13 @@ add_filter('fl_builder_row_attributes', function ($attrs, $row) {
 
     /* Add class for row preset */
     $row_class = $row->settings->row_class ?? null;
-    if (!in_array($row_class, [null, 'default'], true)) {
+    if (! in_array($row_class, [null, 'default'], true)) {
         $attrs['class'][] = $row_class;
     }
 
     /* Add class for background preset */
-    $bg_class = $row->settings->background_class ?? null;
-    if (!in_array($bg_class, [null, 'default'], true)) {
+    $bg_class = $row->settings->bg_preset_class ?? null;
+    if (! in_array($bg_class, [null, 'default'], true)) {
         $attrs['class'][] = $bg_class;
     }
 
@@ -117,6 +138,11 @@ add_filter('fl_builder_row_attributes', function ($attrs, $row) {
 
 /**
  * Set our custom button preset settings to Button module settings.
+ *
+ * @param object $settings
+ * @param array  $presets
+ *
+ * @return object
  */
 function fs_set_button_preset($settings, $presets)
 {
@@ -141,6 +167,11 @@ function fs_set_button_preset($settings, $presets)
 
 /**
  * Set our custom button preset settings to CTA module's button settings.
+ *
+ * @param object $settings
+ * @param array  $presets
+ *
+ * @return object
  */
 function fs_set_cta_preset($settings, $presets)
 {

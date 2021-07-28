@@ -7,11 +7,10 @@ if (! defined('ABSPATH')) {
     return;
 }
 
-
 /**
 * Define Constants
 */
-define('FS_THEME_VERSION', '2.0.0');
+define('FS_THEME_VERSION', '2.0.1');
 define('FS_DEV_MODE', false);
 define('FS_THEME_USE_FONT_AWESOME', false); // Enable this only if BB plugin is active.
 define('FS_THEME_USE_CUSTOM_JS', false); // This will enqueue script.js file.
@@ -26,10 +25,9 @@ require_once 'includes/bb-functions.php';
 * Enqueue styles
 */
 add_action('wp_enqueue_scripts', function () {
-
     $version = FS_DEV_MODE ? time() : FS_THEME_VERSION;
 
-    // Enqueue Beaver Builder's Font Awesome librsry file.
+    // Enqueue Beaver Builder's Font Awesome library file.
     if (FS_THEME_USE_FONT_AWESOME) {
         wp_enqueue_style('font-awesome-5');
     }
@@ -40,7 +38,6 @@ add_action('wp_enqueue_scripts', function () {
         get_stylesheet_directory_uri() . '/assets/css/style.css',
         [],
         $version,
-        'all'
     );
 
     // Enqueue script.js file.
@@ -50,10 +47,10 @@ add_action('wp_enqueue_scripts', function () {
             get_stylesheet_directory_uri() . '/assets/js/script.js',
             ['jquery'],
             $version,
-            true
+            true,
         );
     }
-}, 10);
+});
 
 /**
  * Create custom post types (if needed)
@@ -69,6 +66,16 @@ function fs_define_post_types_taxonomies()
 // Uncomment the lines below to add custom post type and taxonomies.
 // phpcs:ignore Squiz.Commenting.InlineComment.InvalidEndChar
 // add_action('init', 'fs_define_post_types_taxonomies', 0);
+
+/**
+ * Gets and returns the generated config from SCSS variables.
+ *
+ * @return array
+ */
+function fs_get_theme_style_config()
+{
+    return json_decode(file_get_contents(get_stylesheet_directory() . '/assets/palette.json'));
+}
 
 /**
  * Create custom button presets for BB Button module.
@@ -112,6 +119,8 @@ function fs_get_bb_button_presets()
         ],
         'font_weight' => '400',
         'text_align' => 'left',
+        'text_decoration' => 'none',
+        'font_family' => 'Default'
     ];
     $default_settings = [
         'bg_color' => 'eeeeee',
@@ -141,21 +150,21 @@ function fs_get_bb_button_presets()
 
     $button_presets['primary'] = [
         'name' => 'Primary',
-        'class' => 'primary-button',
-        'settings' => $default_settings
+        'class' => 'button-primary',
+        'settings' => $default_settings,
     ];
 
     $button_presets['secondary'] = [
         'name' => 'Secondary',
-        'class' => 'secondary-button',
+        'class' => 'button-secondary',
         'settings' => fs_wp_parse_args_recursive([
             'bg_color' => '000000',
             'bg_hover_color' => 'ffffff',
             'text_color' => 'ffffff',
             'text_hover_color' => '000000',
             'border' => [
-                'color' => '000000'
-            ]
+                'color' => '000000',
+            ],
         ], $default_settings),
     ];
 
@@ -163,33 +172,36 @@ function fs_get_bb_button_presets()
 }
 
 /**
- * Create custom row presets for BB to add respective class to the rows.
+ * Returns a list of classes for use as "row presets" in Beaver Builder.
  *
  * @see /includes/bb-functions.php
  * @see /resources/styles/common/_utilities.scss
+ *
+ * @return array
  */
-function fs_get_row_presets()
+function fs_get_row_preset_class_names()
 {
-    $row_presets = [
-        'default' => 'Default',
-        'homepage-banner-row' => 'Homepage Banner Row',
-        'page-banner-row' => 'Hero Banner Row',
+    return [
+        'row-preset-default' => 'Default',
+        'row-preset-homepage-banner' => 'Homepage Banner',
+        'row-preset-page-banner' => 'Hero Banner',
     ];
-    return $row_presets;
 }
 
 /**
- * Create custom row background presets for BB to add respective class to the rows.
+ * Gets a list of classes available for use as background colours.
  *
  * @see /includes/bb-functions.php
  * @see /resources/styles/common/_utilities.scss
+ *
+ * @return array
  */
-function fs_get_background_presets()
+function fs_get_background_class_names()
 {
-    $bg_presets = [
-        'default' => 'No Preset Background',
-        'grey-background' => 'Grey Background',
-        'white-background' => 'White Background'
+    return [
+        'bg-default' => 'Default',
+        'bg-grey-dark' => 'Dark grey',
+        'bg-grey-light' => 'Light grey',
+        'bg-white' => 'White',
     ];
-    return $bg_presets;
 }
