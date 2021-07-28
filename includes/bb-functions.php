@@ -146,21 +146,39 @@ add_filter('fl_builder_row_attributes', function ($attrs, $row) {
  */
 function fs_set_button_preset($settings, $presets)
 {
-    if ('default' === $settings->button_preset) {
+    if ('default' === ($settings->button_preset ?? 'default')) {
         return $settings;
     }
 
-    $custom_settings = $presets[$settings->button_preset]['settings'];
-    $custom_class = isset($presets[$settings->button_preset]['class'])
-        ? $presets[$settings->button_preset]['class'] : '';
+    /**
+     * If the selected preset does not exist in our array
+     * we set the `$custom_settings` variable to null
+     * because we know that it is not valid for use.
+     */
+    $custom_settings = $presets[$settings->button_preset]['settings'] ?? null;
+    // If it is null, exit the function early since there is nothing to do.
+    if (null === $custom_settings) {
+        return $settings;
+    }
 
+    // Loop our custom settings and apply to the main `$settings` object.
     foreach ($custom_settings as $key => $setting) {
-        $settings->$key = $setting;
+        $settings->{$key} = $setting;
     }
 
-    if ('' !== $custom_class && property_exists($settings, 'class')) {
-        $settings->class .= $custom_class;
+    // Like before, look for a value and exit early if it fails.
+    $custom_class = $presets[$settings->button_preset]['class'] ?? null;
+    if (null === $custom_class) {
+        return $settings;
     }
+
+    // If the object doesn't have a `class` property, exit early.
+    if (! property_exists($settings, 'class')) {
+        return $settings;
+    }
+
+    // Finally, add the new classname.
+    $settings->class = " {$custom_class}";
 
     return $settings;
 }
