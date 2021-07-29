@@ -3,17 +3,22 @@
 
     // Helps equalizing height of elements
     function equalizeHeights(elements){
-        elements.forEach(function(elem){
-            var $element = $(elem);
-            if($element.length > 0){
-                var maxHeight = 0;
-                $element.each(function() {
-                    if ($(this).outerHeight() > maxHeight) {
-                        maxHeight = $(this).outerHeight();
-                    }
-                }).height(maxHeight);
-            }
-        });
+
+      if($(window).width() <= 767){
+       return;
+      }
+
+      elements.forEach(function(elem){
+          var $element = $(elem);
+          if($element.length > 0){
+              var maxHeight = 0;
+              $element.each(function() {
+                  if ($(this).outerHeight() > maxHeight) {
+                      maxHeight = $(this).outerHeight();
+                  }
+              }).height(maxHeight);
+          }
+      });
     }
 
     // Run code when docuemnt is ready
