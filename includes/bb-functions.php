@@ -178,8 +178,8 @@ function fs_set_button_preset($settings, $presets)
     }
 
     // Finally, add the new classname.
-    if (!str_contains($settings->class, $custom_class)) {
-        $settings->class = $settings->class . " {$custom_class}";
+    if (false === strpos($settings->class, $custom_class)) {
+        $settings->class .= " {$custom_class}";
     }
 
     return $settings;
