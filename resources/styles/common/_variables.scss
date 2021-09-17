@@ -12,16 +12,22 @@ $breakpoints: (
 );
 
 /**
+ * Font Families
+ */
+$font-primary: 'Primary Font Name', serif;
+$font-secondary: 'Secondary Font Name', serif;
+$font-icon: "Font Awesome 5 Pro", serif;
+
+/**
  * Colours
  */
 $white: #fff;
 $black: #000;
-$light-grey: #eee;
-$dark-grey: #ccc;
-$transparent: transparent;
-
-$primary-color: #0170b9;
-$secondary-color: #3a3a3a;
+$grey-light: #eee;
+$grey-dark: #3a3a3a;
+$blue: #0170b9;
+$primary: $blue;
+$secondary: $grey-dark;
 
 /**
  * Links
@@ -32,6 +38,9 @@ $link-focus-outline: 1px solid;
 $link-text-decoration: none;
 $link-hover-text-decoration: underline;
 $link-focus-text-decoration: $link-hover-text-decoration;
+$link-font-weight: normal;
+$link-hover-font-weight: $link-font-weight;
+$link-focus-font-weight: $link-font-weight;
 
 /**
  * Primary Button. Manage rest of the styling from Customizer
@@ -49,14 +58,14 @@ $button-focus-text-decoration: $button-hover-text-decoration;
  * Secondary Button
  */
 $button-secondary-color: $white;
-$button-secondary-hover-color: $secondary-color;
+$button-secondary-hover-color: $secondary;
 $button-secondary-focus-color: $button-secondary-hover-color;
-$button-secondary-bg-color: $secondary-color;
+$button-secondary-bg-color: $secondary;
 $button-secondary-hover-bg-color: $button-secondary-color;
 $button-secondary-focus-bg-color: $button-secondary-hover-bg-color;
-$button-secondary-border-color: $secondary-color;
-$button-secondary-hover-border-color: $secondary-color;
-$button-secondary-focus-border-color: $secondary-color;
+$button-secondary-border-color: $secondary;
+$button-secondary-hover-border-color: $secondary;
+$button-secondary-focus-border-color: $secondary;
 
 /**
  * Forms
@@ -64,11 +73,11 @@ $button-secondary-focus-border-color: $secondary-color;
 $form-field-color: $black;
 $form-field-focus-color: $black;
 $form-field-placeholder-color: $black;
-$form-field-bg-color: $transparent;
-$form-field-focus-bg-color: $transparent;
+$form-field-bg-color: transparent;
+$form-field-focus-bg-color: transparent;
 $form-field-border-size: 1px;
 $form-field-border-style: solid;
-$form-field-border-color: $dark-grey;
+$form-field-border-color: $grey-dark;
 $form-field-box-shadow: none;
 $form-field-margin-bottom: 20px;
 $form-field-border-radius: 5px;
