@@ -10,7 +10,7 @@ if (! defined('ABSPATH')) {
 /**
 * Define Constants
 */
-define('FS_THEME_VERSION', '2.0.1');
+define('FS_THEME_VERSION', '2.1');
 define('FS_DEV_MODE', false);
 define('FS_THEME_USE_FONT_AWESOME', false); // Enable this only if BB plugin is active.
 define('FS_THEME_USE_CUSTOM_JS', false); // This will enqueue script.js file.
@@ -51,6 +51,33 @@ add_action('wp_enqueue_scripts', function () {
         );
     }
 });
+
+/**
+* Define custom image sizes
+*/
+add_action('after_setup_theme', function () {
+    add_image_size('homepage-banner', 1920, 1280);
+    add_image_size('page-banner', 1920, 800);
+    add_image_size('post-item-thumbnail', 400, 300);
+});
+
+/**
+* Add custom image sizes to Beaver Builder sekector
+*/
+add_filter('image_size_names_choose', function ($sizes) {
+    global $_wp_additional_image_sizes;
+    if (empty($_wp_additional_image_sizes)) {
+        return $sizes;
+    }
+
+    foreach ($_wp_additional_image_sizes as $id => $data) {
+        if (!isset($sizes[$id])) {
+            $sizes[$id] = ucfirst(str_replace('-', ' ', $id));
+        }
+    }
+
+    return $sizes;
+}, 15, 1);
 
 /**
  * Create custom post types (if needed)
