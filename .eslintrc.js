@@ -2,15 +2,30 @@
 module.exports = {
   root: true,
   env: {
+    amd: true,
     browser: true,
+    es6: true,
+    node: true,
     jquery: true,
   },
   extends: 'eslint:recommended',
+  parser: 'babel-eslint',
   parserOptions: {
-    ecmaVersion: 5,
+    ecmaFeatures: {
+      generators: false,
+      globalReturn: true,
+      objectLiteralDuplicateProperties: false,
+    },
+    ecmaVersion: 2017,
+    sourceType: 'module',
   },
   globals: {
     wp: true,
+  },
+  plugins: ['import'],
+  settings: {
+    'import/core-modules': [],
+    'import/ignore': ['node_modules', '\\.(coffee|scss|css|less|hbs|svg|json)$'],
   },
   rules: {
     semi: [
