@@ -1,7 +1,8 @@
 /**
  * Links
  */
-a {
+a,
+.ast-single-post .entry-content a {
   outline: $link-outline;
 
   &:hover {
