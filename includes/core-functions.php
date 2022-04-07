@@ -136,10 +136,10 @@ add_filter('astra_mobile_breakpoint', function () {
 
 /**
 * To change default tablet
-* screen break point to 992px
+* screen break point to 1024px
 */
 add_filter('astra_tablet_breakpoint', function () {
-    return 992;
+    return 1024;
 });
 
 /**
@@ -147,7 +147,7 @@ add_filter('astra_tablet_breakpoint', function () {
 * breakpoint for hamburger icons
 */
 add_filter('astra_header_break_point', function () {
-    return 992;
+    return 1024;
 });
 
 /**
